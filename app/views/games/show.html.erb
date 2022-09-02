@@ -1,21 +1,61 @@
-<h1><%= @game.name %> (<%= @game.category %>)</h1>
+<div class="navbar navbar-expand-sm navbar-light navbar-white navbar-lewagon fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<%= cl_image_tag @game.photo.key %>
-
-<h2>Description</h2>
-<p><%= @game.description %></p>
-
-<h2>Participants</h2>
-
-<div class="cards">
-  <% @game.players.each do |player| %>
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="<%= player.photo_url %>" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text"><%= player.username %></p>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Messages</a>
+          </li>
+          <li class="nav-item dropdown">
+            <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" data-turbo-method="delete" href="#">Log out</a>
+            </div>
+          </li>
+          <!--li class="nav-item"-->
+          <!--/li-->
+      </ul>
     </div>
-  <% end %>
+  </div>
 </div>
 
-<%= link_to "Participate to game", new_game_participation_path(@game) %>
+<div class="my-5">
+  <h1 class="text-center"><%= @game.name %> (<%= @game.category %>)</h1>
+
+  <% if @game.photo.attached? %>
+    <%= cl_image_tag @game.photo.key, height: 300, width: 900, crop: :fill, class: "rounded shadow-md my-3" %>
+  <% else %>
+    <%= image_tag "kid-car" %>
+  <% end %>
+
+  <h2 class="text-center">Description</h2>
+  <p><%= @game.description %></p>
+
+  <h2 class="text-center">Participants</h2>
+
+  <div class="cards my-3">
+    <% @game.players.each do |player| %>
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="<%= player.photo_url %>" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text"><%= player.username %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-center">
+    <%= link_to "Participate to game", new_game_participation_path(@game), class: "btn btn-primary w-25" %>
+  </div>
+</div>

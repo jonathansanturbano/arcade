@@ -1,18 +1,54 @@
-<h1>All the games</h1>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon fixed-top" data-controller="navbar" data-action="scroll@window->navbar#updateNavbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<ul>
-  <% @games.each do |game| %>
-    <li>
-      <%= game.name %>
-      <%= link_to "See game", game_path(game) %>
-      <%= link_to edit_game_path(game) do %>
-        <i class="fa-solid fa-pen"></i>
-      <% end %>
-      <%= link_to game_path(game), data: { turbo_method: :delete, turbo_confirm: "Are you sure to delete #{game.name}?" } do %>
-        <i class="fa-solid fa-trash"></i>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Messages</a>
+          </li>
+          <li class="nav-item dropdown">
+            <img class="avatar dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" data-turbo-method="delete" href="#">Log out</a>
+            </div>
+          </li>
+          <!--li class="nav-item"-->
+          <!--/li-->
+      </ul>
+    </div>
+  </div>
+</div>
 
-<%= link_to "Add a game", new_game_path, class: "btn btn-primary" %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= asset_path "pikachu" %>');">
+  <div class="container">
+    <p data-controller="typed"></p>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <h1 class="text-center">All the games</h1>
+  <div class="cards">
+    <% @games.each do |game| %>
+      <%= link_to game_path(game) do %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= game.photo.attached? ? (cl_image_path game.photo.key) : (image_tag "kid-car") %> ')">
+          <%= game.name %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to "Add a game", new_game_path, class: "btn btn-primary" %>
+</div>
+
