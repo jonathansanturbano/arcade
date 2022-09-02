@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   CATEGORIES = ["Mathematical", "Board", "Puzzle", "Strategy", "Action", "PVP"]
   has_many :participations, dependent: :destroy # game.participations
   has_many :players, through: :participations # game.players
+  has_one_attached :photo
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true, length: { minimum: 50 }

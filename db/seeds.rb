@@ -1,3 +1,5 @@
+require "open-uri"
+
 puts "Deleting all seeds..."
 
 Game.destroy_all && Player.destroy_all if Rails.env.development?
@@ -14,6 +16,9 @@ game_names.each do |game_name|
     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate rem saepe nulla aliquid, accusantium numquam, quis placeat labore ipsum molestiae quasi consequatur odio sit perferendis sequi sint laborum nesciunt porro.",
     category: categories.sample
   )
+  photo_url = URI.open("https://source.unsplash.com/1600x900/?#{game_name}")
+  game.photo.attach(io: photo_url, filename: game_name)
+
   puts "#{game.name} created 🌱"
 end
 
