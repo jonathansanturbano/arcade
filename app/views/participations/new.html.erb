@@ -1,0 +1,6 @@
+<h1>Participate in game</h1>
+
+<%= simple_form_for [@game, @participation] do |f| %>
+  <%= f.association :player, label_method: :username, value_method: :id, include_blank: false  %>
+  <%= f.submit %>
+<% end %>

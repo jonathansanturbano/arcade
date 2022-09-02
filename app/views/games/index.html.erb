@@ -1,0 +1,16 @@
+<h1>All the games</h1>
+
+<ul>
+  <% @games.each do |game| %>
+    <li>
+      <%= game.name %>
+      <%= link_to "See game", game_path(game) %>
+      <%= link_to edit_game_path(game) do %>
+        <i class="fa-solid fa-pen"></i>
+      <% end %>
+      <%= link_to game_path(game), data: { turbo_method: :delete, turbo_confirm: "Are you sure to delete #{game.name}?" } do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

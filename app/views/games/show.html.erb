@@ -1,0 +1,19 @@
+<h1><%= @game.name %> (<%= @game.category %>)</h1>
+
+<h2>Description</h2>
+<p><%= @game.description %></p>
+
+<h2>Participants</h2>
+
+<div class="cards">
+  <% @game.players.each do |player| %>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="<%= player.photo_url %>" alt="Card image cap">
+      <div class="card-body">
+        <p class="card-text"><%= player.username %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Participate to game", new_game_participation_path(@game) %>
